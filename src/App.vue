@@ -1,5 +1,5 @@
 <template>
-  <div class="window" :style="escurecer()">
+  <div class="window">
     <div class="header">
       <img src="@/assets/images/logo.svg" class="logo">
       <div class="nav-link">
@@ -110,6 +110,8 @@
         </div>
       </div>
     </div>
+    <div class="darken" v-if="menu === true">
+    </div>
   </div>
 </template>
 <script>
@@ -125,16 +127,11 @@ export default {
     },
     sideBarMenu() {
       if (this.menu === true) {
-        return "display:block;height: 100%;display: flex;flex-direction: column; gap: 3vh; position: absolute; right: 0;top: 0;width: 50%;background-color: white;padding: 15vh 5vw;font-size: 2.5em; user-select:none;"
+        return "display:block;height: 100%;display: flex;flex-direction: column; gap: 3vh; position: absolute; right: 0;top: 0;width: 50%;background-color: white;padding: 15vh 5vw;font-size: 2.5em; user-select:none;z-index: 2; box-sizing: border-box; "
       }
     },
     closeMenu(){
       this.menu = false
-    },
-    escurecer(){
-      if(this.menu === true){
-        return "background-color: rgba(0,0,0, 0.5);"
-      }
     }
   }
 }
@@ -142,14 +139,23 @@ export default {
 <style>
 body {
   margin: 0;
+  
 }
 .window {
   font-family: 'Inter', sans-serif;
   padding: 5vw 7vw;
   font-size: 1vw;
- 
+  position: relative;
 }
-
+.darken {
+  position: absolute;
+  background-color: rgba(0,0,0,0.7);
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
 .logo {
   width: 5em;
 }
@@ -351,20 +357,7 @@ button:hover {
     font-size: 2.5em;
     margin: 2vh 1vw;
   }
-  /* .sidebar-mobile {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 3vh;
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: 50%;
-    background-color: white;
-    padding: 15vh 5vw;
-    font-size: 2.5em;
-  } */
-
+  
   .body {
     flex-direction: column;
   }
@@ -409,6 +402,7 @@ button:hover {
 
   .mini-cards {
     flex-direction: column;
+    height: fit-content;
   }
 
   .mini-cards img {
